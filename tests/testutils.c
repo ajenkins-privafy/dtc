@@ -46,6 +46,8 @@ void  __attribute__((weak)) cleanup(void)
 
 static void sigint_handler(int signum, siginfo_t *si, void *uc)
 {
+	(void)si;
+	(void)uc;
 	cleanup();
 	fprintf(stderr, "%s: %s (pid=%d)\n", test_name,
 		strsignal(signum), getpid());
@@ -59,6 +61,7 @@ void test_init(int argc, char *argv[])
 		.sa_sigaction = sigint_handler,
 	};
 
+	(void)argc;
 	test_name = argv[0];
 
 	err = sigaction(SIGINT, &sa_int, NULL);

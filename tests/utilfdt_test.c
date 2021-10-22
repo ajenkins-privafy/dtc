@@ -107,7 +107,7 @@ static void test_utilfdt_decode_type(void)
 			"I admire.");
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
 	test_utilfdt_decode_type();
 	PASS();

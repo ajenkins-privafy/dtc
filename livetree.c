@@ -889,6 +889,9 @@ static void add_fixup_entry(struct dt_info *dti, struct node *fn,
 {
 	char *entry;
 
+	/* Unused parameters */
+	(void)dti;
+
 	/* m->ref can only be a REF_PHANDLE, but check anyway */
 	assert(m->type == REF_PHANDLE);
 
@@ -957,6 +960,10 @@ static void add_local_fixup_entry(struct dt_info *dti,
 	fdt32_t value_32;
 	char **compp;
 	int i, depth;
+
+	/* Unused parameters */
+	(void)dti;
+	(void)refnode;
 
 	/* walk back retrieving depth */
 	depth = 0;

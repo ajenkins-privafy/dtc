@@ -76,16 +76,19 @@ static void bin_emit_data(void *e, struct data d)
 
 static void bin_emit_beginnode(void *e, struct label *labels)
 {
+	(void)labels;
 	bin_emit_cell(e, FDT_BEGIN_NODE);
 }
 
 static void bin_emit_endnode(void *e, struct label *labels)
 {
+	(void)labels;
 	bin_emit_cell(e, FDT_END_NODE);
 }
 
 static void bin_emit_property(void *e, struct label *labels)
 {
+	(void)labels;
 	bin_emit_cell(e, FDT_PROP);
 }
 
@@ -298,6 +301,7 @@ static struct data flatten_reserve_list(struct reserve_info *reservelist,
 	struct data d = empty_data;
 	unsigned int j;
 
+	(void)vi;
 	for (re = reservelist; re; re = re->next) {
 		d = data_append_re(d, re->address, re->size);
 	}

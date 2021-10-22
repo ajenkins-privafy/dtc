@@ -668,6 +668,8 @@ ERROR(path_references, fixup_path_references, NULL, &duplicate_node_names);
 static void fixup_omit_unused_nodes(struct check *c, struct dt_info *dti,
 				    struct node *node)
 {
+	(void)c;
+	(void)dti;
 	if (generate_symbols && node->labels)
 		return;
 	if (node->omit_if_unused && !node->is_referenced)
@@ -733,6 +735,8 @@ static void fixup_addr_size_cells(struct check *c, struct dt_info *dti,
 {
 	struct property *prop;
 
+	(void)c;
+	(void)dti;
 	node->addr_cells = -1;
 	node->size_cells = -1;
 
@@ -966,6 +970,8 @@ static bool node_is_compatible(struct node *node, const char *compat)
 
 static void check_simple_bus_bridge(struct check *c, struct dt_info *dti, struct node *node)
 {
+	(void)c;
+	(void)dti;
 	if (node_is_compatible(node, "simple-bus"))
 		node->bus = &simple_bus;
 }
@@ -1476,22 +1482,22 @@ static void check_provider_cells_property(struct check *c,
 	WARNING_IF_NOT_CELL(nm##_is_cell, cells_name); \
 	WARNING(nm##_property, check_provider_cells_property, &nm##_provider, &nm##_is_cell, &phandle_references);
 
-WARNING_PROPERTY_PHANDLE_CELLS(clocks, "clocks", "#clock-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(cooling_device, "cooling-device", "#cooling-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(dmas, "dmas", "#dma-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(hwlocks, "hwlocks", "#hwlock-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(interrupts_extended, "interrupts-extended", "#interrupt-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(io_channels, "io-channels", "#io-channel-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(iommus, "iommus", "#iommu-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(mboxes, "mboxes", "#mbox-cells");
+WARNING_PROPERTY_PHANDLE_CELLS(clocks, "clocks", "#clock-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(cooling_device, "cooling-device", "#cooling-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(dmas, "dmas", "#dma-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(hwlocks, "hwlocks", "#hwlock-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(interrupts_extended, "interrupts-extended", "#interrupt-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(io_channels, "io-channels", "#io-channel-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(iommus, "iommus", "#iommu-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(mboxes, "mboxes", "#mbox-cells", false);
 WARNING_PROPERTY_PHANDLE_CELLS(msi_parent, "msi-parent", "#msi-cells", true);
-WARNING_PROPERTY_PHANDLE_CELLS(mux_controls, "mux-controls", "#mux-control-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(phys, "phys", "#phy-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(power_domains, "power-domains", "#power-domain-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(pwms, "pwms", "#pwm-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(resets, "resets", "#reset-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(sound_dai, "sound-dai", "#sound-dai-cells");
-WARNING_PROPERTY_PHANDLE_CELLS(thermal_sensors, "thermal-sensors", "#thermal-sensor-cells");
+WARNING_PROPERTY_PHANDLE_CELLS(mux_controls, "mux-controls", "#mux-control-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(phys, "phys", "#phy-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(power_domains, "power-domains", "#power-domain-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(pwms, "pwms", "#pwm-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(resets, "resets", "#reset-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(sound_dai, "sound-dai", "#sound-dai-cells", false);
+WARNING_PROPERTY_PHANDLE_CELLS(thermal_sensors, "thermal-sensors", "#thermal-sensor-cells", false);
 
 static bool prop_is_gpio(struct property *prop)
 {
@@ -1757,6 +1763,8 @@ static void check_graph_nodes(struct check *c, struct dt_info *dti,
 {
 	struct node *child;
 
+	(void)c;
+	(void)dti;
 	for_each_child(node, child) {
 		if (!(strprefixeq(child->name, child->basenamelen, "endpoint") ||
 		      get_property(child, "remote-endpoint")))

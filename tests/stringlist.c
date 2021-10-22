@@ -20,6 +20,7 @@ static void check_expected_failure(const void *fdt, const char *path,
 {
 	int offset, err;
 
+	(void)property;
 	offset = fdt_path_offset(fdt, "/");
 	if (offset < 0)
 		FAIL("Couldn't find path %s", path);
